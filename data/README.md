@@ -75,10 +75,10 @@ The training pipeline is designed to be extensible to preference-based optimizat
 
 Project Structure
 .
-├── data/         # Data schema and generation scripts (no raw copyrighted data)
-├── training/     # Post-training scripts and configs
-├── agent/        # Persona, memory, and agent loop logic
-├── evaluation/   # Metrics and qualitative evaluation
+├── data/         
+├── training/    
+├── agent/       
+├── evaluation/  
 └── README.md
 
 
