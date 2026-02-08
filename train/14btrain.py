@@ -16,13 +16,13 @@ import gc
 # 1. 本地基座模型路径
 model_path = "D:/LocalModels/Qwen-14B"
 
-# 2. 只有这一个数据文件！(1700条高质量对话)
+# 2. 数据文件
 data_file = "cloudemoon.jsonl"              
 
 # 3. 输出路径
 output_dir = "./theresa_14b_direct_sft_full"               
 
-MAX_SEQ_LENGTH = 2048 # 对话通常不需要 4096，2048 足够且训练更快
+MAX_SEQ_LENGTH = 2048 
 # ===========================================
 
 # 清理内存
@@ -109,11 +109,11 @@ tokenized_dataset = dataset.map(format_tokenize, remove_columns=dataset.column_n
 # 5. 训练参数 (激进微调版)
 training_args = TrainingArguments(
     output_dir=output_dir,            
-    num_train_epochs=4,              # 跑 8 轮！因为数据少，必须多跑几轮让它记死
+    num_train_epochs=4,            
     per_device_train_batch_size=4,   
     gradient_accumulation_steps=4,   
     gradient_checkpointing=True,     
-    learning_rate=1e-4,              # 使用标准的 LoRA 学习率，不再小心翼翼
+    learning_rate=1e-4,           
     logging_steps=5,
     save_strategy="epoch",
     optim="paged_adamw_32bit",       
@@ -121,7 +121,7 @@ training_args = TrainingArguments(
     tf32=True,
     group_by_length=True,
     dataloader_num_workers=0,
-    dataloader_pin_memory=False,     # 保护内存
+    dataloader_pin_memory=False,    
     remove_unused_columns=False,
     warmup_ratio=0.03,
     weight_decay=0.0
@@ -140,3 +140,4 @@ trainer.train()
 
 print(f"\n✅ 训练完成！Adapter 已保存至: {output_dir}")
 model.save_pretrained(output_dir)
+
