@@ -76,60 +76,6 @@ The training pipeline is designed to be extensible to preference-based optimizat
 Project Structure
 .
 ├── data/         
-├── training/    
-├── agent/       
-├── evaluation/  
+├── training/         
 └── README.md
 
-
-Evaluation
-
-Evaluation focuses primarily on qualitative and behavioral metrics, including:
-
-Persona consistency across long conversations
-
-Tone and style adherence
-
-Multi-turn coherence and memory retention
-
-Future work will incorporate automated preference models and reinforcement learning–based evaluation.
-
-
-Key Takeaways
-
-Data quality and instruction structure have a significant impact on persona stability
-
-Multi-turn instruction tuning introduces unique challenges compared to single-turn SFT
-
-LoRA-based post-training provides an efficient and practical approach for controllable agent behavior
-
-Reproducibility and Data Policy
-
-This repository does not release any copyrighted or proprietary raw texts.
-
-
-We provide:
-
-Instruction schemas
-
-Data generation scripts
-
-Training and evaluation code
-
-Users should prepare their own raw data from sources they are authorized to use.
-
-
-Future Work:
-
-Preference optimization using PPO / GRPO-style methods
-
-Reward modeling for persona adherence
-
-Integration with agent-based frameworks (memory, goals, environment interaction)
-
-Evaluation in interactive game or NPC-like environments
-
-
-License
-
-MIT License
