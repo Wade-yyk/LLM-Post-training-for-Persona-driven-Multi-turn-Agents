@@ -202,14 +202,13 @@
 #     output_dir="./theresa_role_adapter",            
 #     num_train_epochs=3,
     
-#     # ⬇️⬇️⬇️ 性能优化核心修改 ⬇️⬇️⬇️
+
 #     per_device_train_batch_size=8,   # 增大 Batch Size
 #     gradient_accumulation_steps=2,   # 减少累积
 #     gradient_checkpointing=True,     # 显存够可尝试设为 False
 #     dataloader_num_workers=0,
 #     dataloader_pin_memory=True,
 #     tf32=True,                       # 开启 TF32
-#     # ⬆️⬆️⬆️ 性能优化核心修改 ⬆️⬆️⬆️
 #     #group_by_length=True,
     
 #     learning_rate=2e-5,
@@ -263,7 +262,7 @@ from peft import (
 )
 
 # ================= 配置区域 =================
-model_id = "Qwen/Qwen1.5-7B"   # 你要的 7B 基座
+model_id = "Qwen/Qwen1.5-7B"   # 7B 基座
 DATA_FILE = "cloudemoon.jsonl"  # 每行：{"instruction":..., "output":...}
 
 ADAPTER_OUT_DIR = "./moon_7b_sft_adapter"
@@ -271,7 +270,7 @@ MERGED_OUT_DIR  = "./moon_7b_sft_merged"
 
 MAX_SEQ_LENGTH = 2048
 
-# LoRA 强度（7B 通常 r=32 就够了；想更强可以改 64）
+
 LORA_R = 32
 LORA_ALPHA = 32
 LORA_DROPOUT = 0.05
@@ -325,7 +324,6 @@ def main():
         inst = ex["instruction"]
         out  = ex["output"]
 
-        # 你也可以换成你自己 7B 的 prompt 模板，只要保持一致就行
         prompt = f"### Instruction:\n{inst}\n\n### Response (月下):\n"
         full = prompt + out + tokenizer.eos_token
 
@@ -335,7 +333,6 @@ def main():
         input_ids = tok_full["input_ids"]
         labels = input_ids.copy()
 
-        # mask 掉 prompt 部分，只训练回答
         prompt_len = len(tok_prompt["input_ids"])
         labels[:prompt_len] = [-100] * prompt_len
 
@@ -359,7 +356,7 @@ def main():
         logging_steps=10,
         save_strategy="epoch",
         optim="paged_adamw_32bit",
-        bf16=True,            # 你的显卡不支持 bf16 就改 fp16=True
+        bf16=True,          
         tf32=True,
         group_by_length=True,
         remove_unused_columns=False,
