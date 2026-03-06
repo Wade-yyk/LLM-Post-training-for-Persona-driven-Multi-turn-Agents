@@ -76,6 +76,6 @@ The training pipeline is designed to be extensible to preference-based optimizat
 Project Structure
 .
 ├── data/         
-├── training/         
+├── train/         
 └── README.md
 
