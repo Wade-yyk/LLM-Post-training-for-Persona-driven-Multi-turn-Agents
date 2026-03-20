@@ -135,7 +135,6 @@ trainer = Trainer(
 )
 
 print("\n--- 开始纯净 SFT 训练 ---")
-print("这次我们只教它怎么对话，不教它写小说。")
 trainer.train()
 
 print(f"\n✅ 训练完成！Adapter 已保存至: {output_dir}")
