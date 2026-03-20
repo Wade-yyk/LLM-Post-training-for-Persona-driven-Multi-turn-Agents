@@ -14,13 +14,13 @@ import gc
 
 # ================= 配置区域 =================
 # 1. 本地基座模型路径
-model_path = "D:/LocalModels/Qwen-14B"
+model_path = "Path-to-your-model"
 
 # 2. 数据文件
-data_file = "cloudemoon.jsonl"              
+data_file = "path-to-your-data"              
 
 # 3. 输出路径
-output_dir = "./theresa_14b_direct_sft_full"               
+output_dir = "path-to-where-you-want-to-put"               
 
 MAX_SEQ_LENGTH = 2048 
 # ===========================================
@@ -74,7 +74,7 @@ dataset = load_dataset("json", data_files={"train": data_file}, split="train")
 
 # def format_tokenize(example):
 #     # 纯净的 Prompt 格式
-#     prompt = f"### Instruction:\n{example['instruction']}\n\n### Response (德丽莎):\n{example['output']}<|endoftext|>"
+#     prompt = f"### Instruction:\n{example['instruction']}\n\n### Response (月下):\n{example['output']}<|endoftext|>"
 #     tokenized = tokenizer(
 #         prompt,
 #         truncation=True,
