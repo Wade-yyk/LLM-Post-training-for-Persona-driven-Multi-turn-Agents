@@ -262,6 +262,7 @@ from peft import (
 )
 
 # ================= 配置区域 =================
+#这个是直接huggingface下载的7b模型，如果想自动下模型选择位置可以参考14b的做法
 model_id = "Qwen/Qwen1.5-7B"   # 7B 基座
 DATA_FILE = "cloudemoon.jsonl"  # 每行：{"instruction":..., "output":...}
 
